@@ -1,0 +1,7 @@
+bs4
+openai
+sentence_transformers
+numpy
+os
+sklearn
+urllib.request
