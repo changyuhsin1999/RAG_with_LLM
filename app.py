@@ -27,8 +27,6 @@ for message in st.session_state.messages:
 prompt = st.chat_input("Ask me anything about Greek myth")
 st.session_state.messages.append({"role": "user", "content": prompt})
 
-
-
 top_5_texts = retrieve_top_5(prompt)
 response = query_llm_with_prompt(top_5_texts)
 
