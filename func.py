@@ -178,3 +178,21 @@ def query_llm_with_prompt(top_5_texts, user_query):
     )
     response = completion.choices[0].message.content
     return response
+
+def query_llm(user_query):
+    import os
+    # Access the OpenAI API key from environment variables
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+
+    # Ensure the OpenAI API key is available
+    if openai_api_key is None:
+        raise ValueError("OpenAI API key not found. Please make sure it's set in .env file.")
+
+    import openai
+    messages=[{"role": "assistant", "content": "You are an expert in Greek myt, please answer user's questions"}, {"role": "user", "content": user_query}]
+    completion = openai.chat.completions.create(
+        model="gpt-3.5-turbo-1106",
+        messages=messages
+    )
+    response_without_RAG = completion.choices[0].message.content
+    return response_without_RAG
