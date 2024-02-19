@@ -42,26 +42,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-#Book url
-#url = "https://www.gutenberg.org/files/22381/22381-h/22381-h.htm"
-
-#if "messages" not in st.session_state:
-    #st.session_state.messages = []
-    
-#for message in st.session_state.messages:
-    #with st.chat_message(message["role"]):
-        #st.markdown(message["content"])
-
-## User input
-#prompt = st.chat_input("Ask me anything about Greek myth")
-#st.session_state.messages.append({"role": "user", "content": prompt})
-
-#top_5_texts = retrieve_top_5(prompt)
-#response = query_llm_with_prompt(top_5_texts)
-
-# Display assistant response in chat message container
-#with st.chat_message("assistant"):
-    #st.markdown(response)
-# Add assistant response to chat history
-#st.session_state.messages.append({"role": "assistant", "content": response})
 
