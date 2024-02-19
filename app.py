@@ -20,6 +20,7 @@ def main():
     # Streamlit UI
     st.title("Greek Myth Encyclopedia")
     image = Image.open('/Users/cindychang/Desktop/RAG_with_LLM/images/Greek_gods.jpg')
+    
     st.image(image)
 
     # Initialize the database
