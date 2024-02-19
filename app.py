@@ -1,32 +1,67 @@
-import streamlit as st
-import requests
-import base64
-import io
-from PIL import Image
-import glob
-from base64 import decodebytes
-from io import BytesIO
+import openai
+import csv
 import numpy as np
-import SentenceTransformer
+from bs4 import BeautifulSoup
+import warnings
+import os
+from dotenv import load_dotenv
+from urllib.request import urlopen
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+import sqlite3
+import streamlit as st
 from func import read_html_file, split_text, create_embeddings, initialize_db, store_embeddings, retrieve_top_5, query_llm_with_prompt
 
-## Title.
-st.write('# Greek story encyclopedia')
+load_dotenv()
+model = SentenceTransformer("all-MiniLM-L6-v2")
 
+def main():
+    # Streamlit UI
+    st.title("Greek Myth Encyclopedia")
+
+    # Initialize the database
+    conn = initialize_db()
+
+    # Input for user query
+    user_query = st.text_input("Ask me anything:")
+
+    if st.button("Submit"):
+        if user_query:
+            # Retrieve top 5 related text chunks from the database
+            user_query_embedding = model.encode([user_query])
+        
+            top_5_texts = retrieve_top_5(user_query_embedding)
+            
+            # Generate a response from the LLM
+            response = query_llm_with_prompt(top_5_texts, user_query)
+            
+            # Display the response
+            st.text_area("Response:", value=response, height=200)
+        else:
+            st.warning("Please enter a query.")
+
+if __name__ == "__main__":
+    main()
 #Book url
-url = "https://www.gutenberg.org/files/22381/22381-h/22381-h.htm"
+#url = "https://www.gutenberg.org/files/22381/22381-h/22381-h.htm"
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+#if "messages" not in st.session_state:
+    #st.session_state.messages = []
     
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+#for message in st.session_state.messages:
+    #with st.chat_message(message["role"]):
+        #st.markdown(message["content"])
 
 ## User input
-prompt = st.chat_input("Ask me anything about Greek myth")
-st.session_state.messages.append({"role": "user", "content": prompt})
+#prompt = st.chat_input("Ask me anything about Greek myth")
+#st.session_state.messages.append({"role": "user", "content": prompt})
 
-top_5_texts = retrieve_top_5(prompt)
-response = query_llm_with_prompt(top_5_texts)
+#top_5_texts = retrieve_top_5(prompt)
+#response = query_llm_with_prompt(top_5_texts)
+
+# Display assistant response in chat message container
+#with st.chat_message("assistant"):
+    #st.markdown(response)
+# Add assistant response to chat history
+#st.session_state.messages.append({"role": "assistant", "content": response})
 
