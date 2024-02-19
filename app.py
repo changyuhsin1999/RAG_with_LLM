@@ -36,7 +36,7 @@ def main():
             response = query_llm_with_prompt(top_5_texts, user_query)
             
             # Display the response
-            st.text_area("Response:", value=response, height=200)
+            st.text_area("Response:", value=response, height=500)
         else:
             st.warning("Please enter a query.")
 
