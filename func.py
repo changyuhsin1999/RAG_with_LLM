@@ -57,12 +57,12 @@ def split_text(text, chunk_size):
         start = end
     return text_chunks
 
-def create_embeddings(text_chunks, model="text-embedding-ada-002"):
+def create_embeddings(text_chunks, model="all-MiniLM-L6-v2"):
     """Create word embeddings from the text chunks to size 1536 vector
 
     Args:
         text_chunks (list): extracted text into chunks
-        model (str): embedding model transferring text to vector. Defaults to "text-embedding-ada-002".
+        model (str): embedding model transferring text to vector. Defaults to "all-MiniLM-L6-v2".
 
     Returns:
         embeddings(list): list of embedded word in vector form
