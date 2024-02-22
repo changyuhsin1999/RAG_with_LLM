@@ -29,3 +29,8 @@ Use Openai API key to generate response
 User can type their input question into the text box and hit "submit". In the response textbox, the model will generate an answer considering all the relevent text from the book.
 Dive into the ancient world and ask any question, discover the stories of gods, heroes, and monsters from ancient Greece and Rome.
 ![Screenshot](https://github.com/changyuhsin1999/RAG_with_LLM/blob/main/images/Screenshot%202024-02-19%20at%201.49.47%20PM.png)
+
+## Evaluation
+I use human evaluation to evaluate through 10 different questions and rate it in the following categories and take the average
+We can see that LLM with RAG perform better in answering questions with details
+![Screenshot](https://github.com/changyuhsin1999/RAG_with_LLM/blob/main/images/Screenshot%202024-02-21%20at%2010.51.30%20PM.png)
